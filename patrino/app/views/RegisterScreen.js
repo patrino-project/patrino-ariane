@@ -9,7 +9,7 @@ import {
 
 import AsyncStorage from '@react-native-community/async-storage';
 
-export default class Register extends Component {
+export default class RegisterScreen extends Component {
   /*Removendo header padrão*/
   static navigationOptions = {
     header: null
@@ -27,6 +27,15 @@ export default class Register extends Component {
     };
   }
 
+  componentDidMount() {
+    const mother = this.props.navigation.state.params.item;
+
+    this.setState({
+      "name": mother.name,
+      "email": mother.email
+    })
+  }
+
   /*Registrando um novo usuário*/
   onRegisterPress() {
     var name = this.state.name;
@@ -35,7 +44,9 @@ export default class Register extends Component {
     var phone = this.state.phone;
     var address = this.state.address;
 
-    return fetch('http://200.137.131.118:1234/users', {
+    const URL = "http://35.202.173.125";
+
+    return fetch(URL + '/mothers', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -64,10 +75,10 @@ export default class Register extends Component {
       <View style={styles.container}>
         <ScrollView>
           <Label>Nome</Label>
-          <TextInput onChangeText={(name) => this.setState({name})} />
+          <TextInput value={this.state.name} onChangeText={(name) => this.setState({name})} />
 
           <Label>E-mail</Label>
-          <TextInput onChangeText={(email) => this.setState({email})} />
+          <TextInput value={this.state.email} onChangeText={(email) => this.setState({email})} />
 
           <Label>Telefone</Label>
           <TextInput onChangeText={(phone) => this.setState({phone})} />

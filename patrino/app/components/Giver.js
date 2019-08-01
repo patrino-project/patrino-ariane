@@ -2,7 +2,7 @@ import React, {Component} from "react";
 
 import {FlatList} from "react-native";
 
-import {ThemeProvider, Card, Text} from "react-native-elements";
+import {ThemeProvider, Card, Text, Button} from "react-native-elements";
 
 export default class Giver extends Component {
     constructor(props) {
@@ -48,10 +48,14 @@ export default class Giver extends Component {
                                    >
                                      <Text
                                        style={{marginBottom: 10}}
-                                       onPress={() => this.props.navigation.navigate("Question", {item})}
                                      >
                                        {item.name}
                                      </Text>
+                                     <Button
+                                       onPress={() => this.props.navigation.navigate("Register", {item})}
+
+                                       title="Visualizar"
+                                     />
                                    </Card>}
          />
 
