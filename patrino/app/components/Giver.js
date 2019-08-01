@@ -18,14 +18,18 @@ export default class Giver extends Component {
     }
 
     loadGivers() {
-      return fetch('http://200.137.131.118:1234/users', {
+      const URL = "http://35.202.173.125";
+
+      return fetch(URL + '/mothers', {
           method: 'GET'
 
         })
         .then((response) => response.json())
         .then((responseJson) => {
+            console.log(responseJson);
+
             this.setState({
-              "givers": responseJson
+              "givers": responseJson.data
             });
         })
         .catch((error) => {
