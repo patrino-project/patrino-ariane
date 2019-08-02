@@ -3,9 +3,11 @@ import {
   StyleSheet,
   View,
   Alert,
-  TextInput,
-  ScrollView
+  ScrollView,
+
 } from "react-native";
+
+import {Text, Button, Input} from "react-native-elements";
 
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -70,30 +72,63 @@ export default class RegisterScreen extends Component {
       });
   }
 
+  /*Registrando um novo usuário*/
+  onRefuse() {
+    var email = this.state.email;
+
+    const URL = "http://35.202.173.125";
+
+    return fetch(URL + '/requests', {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          note:"",
+          status: 2
+        }),
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+
+        this.props.navigation.navigate("MainScreen");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <ScrollView>
-          <Label>Nome</Label>
-          <TextInput value={this.state.name} onChangeText={(name) => this.setState({name})} />
+          <Text>Nome</Text>
+          <Input value={this.state.name} onChangeText={(name) => this.setState({name})} />
 
-          <Label>E-mail</Label>
-          <TextInput value={this.state.email} onChangeText={(email) => this.setState({email})} />
+          <Text>E-mail</Text>
+          <Input value={this.state.email} onChangeText={(email) => this.setState({email})} />
 
-          <Label>Telefone</Label>
-          <TextInput onChangeText={(phone) => this.setState({phone})} />
+          <Text>Telefone</Text>
+          <Input onChangeText={(phone) => this.setState({phone})} />
 
-          <Label>Senha</Label>
-          <TextInput onChangeText={(password) => this.setState({password})} />
+          <Text>Senha</Text>
+          <Input onChangeText={(password) => this.setState({password})} />
 
-          <Label>Endereço</Label>
-          <TextInput onChangeText={(address) => this.setState({address})} />
+          <Text>Endereço</Text>
+          <Input onChangeText={(address) => this.setState({address})} />
 
           <Button success style={{ margin: 10 }}
-            onPress={() => this.onRegisterPress()}
-          >
-            <Text>Cadastrar-se</Text>
-          </Button>
+            onPress={() => this.onRefuse()}
+            title="Recusar"
+
+            />
+
+            <Button success style={{ margin: 10 }}
+              onPress={() => this.onRegisterPress()}
+              title="Editar"
+
+              />
 
         </ScrollView>
       </View>

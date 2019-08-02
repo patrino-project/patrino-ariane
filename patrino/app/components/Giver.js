@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-import {FlatList} from "react-native";
+import {FlatList, Alert} from "react-native";
 
 import {ThemeProvider, Card, Text, Button} from "react-native-elements";
 
@@ -15,6 +15,7 @@ export default class Giver extends Component {
 
     componentDidMount() {
       this.loadGivers();
+
     }
 
     loadGivers() {
@@ -39,6 +40,7 @@ export default class Giver extends Component {
     }
 
     render() {
+      const navigation = this.props.navigation;
       return(
         <ThemeProvider>
           <FlatList
@@ -52,10 +54,14 @@ export default class Giver extends Component {
                                        {item.name}
                                      </Text>
                                      <Button
-                                       onPress={() => this.props.navigation.navigate("Register", {item})}
+                                       onPress={() => this.props.navigation.navigate("RegisterScreen", {item, navigation})}
 
                                        title="Visualizar"
                                      />
+                                     <Button
+                                       onPress={() => this.props.navigation.navigate("QRCodeReader", {item, navigation})}
+                                       title="Novo Frasco"
+                                       />
                                    </Card>}
          />
 
