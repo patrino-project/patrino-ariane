@@ -14,33 +14,35 @@ import {
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
-export default class QRCodeReader extends Component {
+export default class AttachBottleToGiver extends Component {
   static navigationOptions = {
     header: null
   };
 
   onSuccess(e) {
     const URL = "http://35.202.173.125";
-    const navigation = this.props.navigation.state.params.navigation;
+    const mother = this.props.navigation.state.params.item;
+
+    console.log(mother);
 
     return fetch(URL + '/bottles', {
-        method: 'GET',
+        method: 'POST',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          bottle: e.data
+          mother: mother.code
         }),
       })
       .then((response) => response.json())
       .then((responseJson) => {
-        navigation.navigate("BottleView", {responseJson})
+        Alert.alert("Novo frasco anexado com sucesso!");
 
       })
       .catch((error) => {
         console.log(error);
-        Alert.alert("Nenhum frasco encontrado!");
+        Alert.alert("Novo frasco não anexado!");
 
       });
 

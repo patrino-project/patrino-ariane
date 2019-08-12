@@ -59,7 +59,7 @@ export default class Giver extends Component {
                                        title="Visualizar"
                                      />
                                      <Button
-                                       onPress={() => this.props.navigation.navigate("QRCodeReader", {item, navigation})}
+                                       onPress={() => this.props.navigation.navigate("AttachBottleToGiver", {item, navigation})}
                                        title="Novo Frasco"
                                        />
                                    </Card>}

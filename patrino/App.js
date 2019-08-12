@@ -18,6 +18,8 @@ import MainScreen from "./app/views/MainScreen";
 import ProfileScreen from "./app/views/ProfileScreen";
 import RegisterScreen from "./app/views/RegisterScreen";
 import QRCodeReader from "./app/views/QRCodeReader";
+import AttachBottleToGiver from "./app/views/AttachBottleToGiver";
+import BottleView from "./app/views/BottleView";
 
 class Home extends Component {
   constructor(props) {
@@ -105,6 +107,12 @@ const App = createStackNavigator({
     }
   },
 
+  AttachBottleToGiver: {
+    screen: AttachBottleToGiver,
+    navigationOptions: {
+      title: "AttachBottleToGiver"
+    }
+  },
 
 });
 
