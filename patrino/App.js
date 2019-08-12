@@ -104,6 +104,8 @@ const App = createStackNavigator({
       title: "QRCodeReader"
     }
   },
+
+
 });
 
 export default createAppContainer(App);
