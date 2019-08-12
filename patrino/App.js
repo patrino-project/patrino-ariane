@@ -114,6 +114,13 @@ const App = createStackNavigator({
     }
   },
 
+  BottleView: {
+    screen: BottleView,
+    navigationOptions: {
+      title: "BottleView"
+    }
+  },
+
 });
 
 export default createAppContainer(App);

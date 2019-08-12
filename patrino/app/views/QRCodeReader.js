@@ -23,19 +23,19 @@ export default class QRCodeReader extends Component {
     const URL = "http://35.202.173.125";
     const navigation = this.props.navigation.state.params.navigation;
 
-    return fetch(URL + '/bottles', {
+    console.log(e.data);
+
+    return fetch(URL + '/bottles/' + e.data, {
         method: 'GET',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          bottle: e.data
-        }),
+        }
       })
       .then((response) => response.json())
       .then((responseJson) => {
-        navigation.navigate("BottleView", {responseJson})
+        const item = responseJson[0];
+        navigation.navigate("BottleView", {item})
 
       })
       .catch((error) => {
