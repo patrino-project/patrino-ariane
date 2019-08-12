@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 
-import {FlatList} from "react-native";
+import {FlatList, Alert} from "react-native";
 
-import {ThemeProvider, Card, Text} from "react-native-elements";
+import {ThemeProvider, Card, Text, Button} from "react-native-elements";
 
 export default class Giver extends Component {
     constructor(props) {
@@ -15,17 +15,22 @@ export default class Giver extends Component {
 
     componentDidMount() {
       this.loadGivers();
+
     }
 
     loadGivers() {
-      return fetch('http://200.137.131.118:1234/users', {
+      const URL = "http://35.202.173.125";
+
+      return fetch(URL + '/mothers', {
           method: 'GET'
 
         })
         .then((response) => response.json())
         .then((responseJson) => {
+            console.log(responseJson);
+
             this.setState({
-              "givers": responseJson
+              "givers": responseJson.data
             });
         })
         .catch((error) => {
@@ -35,6 +40,7 @@ export default class Giver extends Component {
     }
 
     render() {
+      const navigation = this.props.navigation;
       return(
         <ThemeProvider>
           <FlatList
@@ -44,10 +50,18 @@ export default class Giver extends Component {
                                    >
                                      <Text
                                        style={{marginBottom: 10}}
-                                       onPress={() => this.props.navigation.navigate("Question", {item})}
                                      >
                                        {item.name}
                                      </Text>
+                                     <Button
+                                       onPress={() => this.props.navigation.navigate("RegisterScreen", {item, navigation})}
+
+                                       title="Visualizar"
+                                     />
+                                     <Button
+                                       onPress={() => this.props.navigation.navigate("QRCodeReader", {item, navigation})}
+                                       title="Novo Frasco"
+                                       />
                                    </Card>}
          />
 

@@ -11,7 +11,7 @@ export default class LoginScreen extends Component {
   static navigationOptions = {
     header: null
   };
-  
+
   constructor(props) {
     super(props);
 
@@ -40,7 +40,9 @@ export default class LoginScreen extends Component {
     const email = this.state.email;
     const password = this.state.password;
 
-    return fetch('http://200.137.131.118:1234/login', {
+    const URL = "http://35.202.173.125";
+
+    return fetch(URL + '/attendants/login', {
         method: 'POST',
         headers: {
           Accept: 'application/json',

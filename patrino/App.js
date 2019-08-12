@@ -16,6 +16,8 @@ import {
 import LoginScreen from "./app/views/LoginScreen";
 import MainScreen from "./app/views/MainScreen";
 import ProfileScreen from "./app/views/ProfileScreen";
+import RegisterScreen from "./app/views/RegisterScreen";
+import QRCodeReader from "./app/views/QRCodeReader";
 
 class Home extends Component {
   constructor(props) {
@@ -87,6 +89,19 @@ const App = createStackNavigator({
     screen: ProfileScreen,
     navigationOptions: {
       title: "ProfileScreen"
+    }
+  },
+  RegisterScreen: {
+    screen: RegisterScreen,
+    navigationOptions: {
+      title: "RegisterScreen"
+    }
+  },
+
+  QRCodeReader: {
+    screen: QRCodeReader,
+    navigationOptions: {
+      title: "QRCodeReader"
     }
   },
 });
