@@ -6,7 +6,7 @@ import TabNavigator from 'react-native-tab-navigator';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Home from "./Home";
-import News from "./News";
+import BottleTab from "./BottleTab";
 import Giver from "./Giver";
 
 export default class TabsBar extends Component {
@@ -44,14 +44,14 @@ export default class TabsBar extends Component {
           </TabNavigator.Item>
 
           <TabNavigator.Item
-            title="Notícias"
-            selected={this.state.selectedTab === 'news'}
-            onPress={() => this.setState({selectedTab: 'news'})}
-            renderIcon={() => <Icon name="user" />}
+            title="Frascos"
+            selected={this.state.selectedTab === 'bottles'}
+            onPress={() => this.setState({selectedTab: 'bottles'})}
+            renderIcon={() => <Icon name="home" />}
             renderSelectedIcon={() => <Icon name="user" />}
             selectedTitleStyle={{color: "#3496f0"}}
           >
-            <News />
+            <BottleTab navigation={this.props.navigation} />
           </TabNavigator.Item>
         </TabNavigator>
 

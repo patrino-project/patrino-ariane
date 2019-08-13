@@ -4,33 +4,41 @@ import {FlatList, Alert} from "react-native";
 
 import {ThemeProvider, Card, Text, Button} from "react-native-elements";
 
-export default class Giver extends Component {
+export default class BottleTab extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-          "givers": []
+          "bottles": []
         };
     }
 
     componentDidMount() {
-      this.loadGivers();
+      this.loadBottles();
 
     }
 
-    loadGivers() {
+    loadBottles() {
       const URL = "http://35.202.173.125";
 
-      return fetch(URL + '/mothers', {
+      return fetch(URL + '/bottles', {
           method: 'GET'
 
         })
         .then((response) => response.json())
         .then((responseJson) => {
-            console.log(responseJson);
+            let bottles = responseJson;
+
+            for(i in bottles) {
+              let date = new Date(bottles[i].createdAt);
+              let date1 = new Date(bottles[i].deadline);
+
+              bottles[i].createdAt = date.getDay() + "/" + date.getMonth() + "/" + date.getYear();
+              bottles[i].deadline = date.getDay() + "/" + date.getMonth() + "/" + date.getYear();
+            }
 
             this.setState({
-              "givers": responseJson.data
+              "bottles": bottles
             });
         })
         .catch((error) => {
@@ -44,24 +52,27 @@ export default class Giver extends Component {
       return(
         <ThemeProvider>
           <FlatList
-           data={this.state.givers}
+           data={this.state.bottles}
            keyExtractor={(item, index) => item.email}
            renderItem={({item}) => <Card
                                    >
                                      <Text
                                        style={{marginBottom: 10}}
                                      >
-                                       {item.name}
+                                       Recebido em {item.createdAt}
+                                     </Text>
+
+                                     <Text
+                                       style={{marginBottom: 10}}
+                                     >
+                                       Valido até {item.deadline}
                                      </Text>
                                      <Button
-                                       onPress={() => this.props.navigation.navigate("RegisterScreen", {item, navigation})}
+                                       onPress={() => this.props.navigation.navigate("BottleView", {item, navigation})}
 
                                        title="Visualizar"
                                      />
-                                     <Button
-                                       onPress={() => this.props.navigation.navigate("AttachBottleToGiver", {item, navigation})}
-                                       title="Novo Frasco"
-                                       />
+
                                    </Card>}
          />
 

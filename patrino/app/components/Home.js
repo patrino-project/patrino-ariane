@@ -7,11 +7,13 @@ import {Button} from "react-native-elements";
 export default class Home extends Component {
 
     render() {
+      const navigation = this.props.navigation;
+
       return(
         <View>
           <Button
-            onPress={() => this.props.navigation.navigate("QRCodeReader")}
-            title="Novo Frasco"
+            onPress={() => this.props.navigation.navigate("QRCodeReader", {navigation})}
+            title="Ler QR Code"
             />
         </View>
       );
