@@ -51,7 +51,7 @@ export default class TabsBar extends Component {
             renderSelectedIcon={() => <Icon name="user" />}
             selectedTitleStyle={{color: "#3496f0"}}
           >
-            <BottleTab />
+            <BottleTab navigation={this.props.navigation} />
           </TabNavigator.Item>
         </TabNavigator>
 
